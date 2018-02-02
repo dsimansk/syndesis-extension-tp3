@@ -9,7 +9,7 @@ public class TodoReport {
 	private String contactName;
 	private String contactNumber;
 
-	private List<String> damagedItems;
+	private String damagedItems;
 
 	public String getVendor() {
 		return vendor;
@@ -35,11 +35,11 @@ public class TodoReport {
 		this.contactNumber = contactNumber;
 	}
 
-	public List<String> getDamagedItems() {
+	public String getDamagedItems() {
 		return damagedItems;
 	}
 
-	public void setDamagedItems(List<String> damagedItems) {
+	public void setDamagedItems(String damagedItems) {
 		this.damagedItems = damagedItems;
 	}
 }

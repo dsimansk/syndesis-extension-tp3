@@ -33,10 +33,12 @@ public class TodoDamageReporter {
                 .map(Item::getId)
                 .collect(Collectors.toList());
 
-        report.setContactName("Joe");
+        report.setContactName("Joe Daemon");
         report.setContactNumber("123");
-        report.setDamagedItems(damagedItems);
-
+        StringBuilder sb = new StringBuilder();
+        damagedItems.forEach(s -> sb.append(s).append(" "));
+        report.setDamagedItems(sb.toString());
+        
         return report;
     }
 }
