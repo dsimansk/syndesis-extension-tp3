@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.github.lburgazzoli</groupId>
-  <artifactId>syndesis-extension-example-datashape</artifactId>
+  <groupId>io.syndesis.extension</groupId>
+  <artifactId>syndesis-damage-reporter</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>Syndesis Extension (DataShape)</name>
   <description>A simple Syndesis Extension (DataShape)</description>
@@ -23,7 +23,7 @@
     <!-- dependencies -->
     <spring-boot.version>1.5.8.RELEASE</spring-boot.version>
     <camel.version>2.20.1</camel.version>
-    <syndesis.version>1.2-SNAPSHOT</syndesis.version>
+    <syndesis.version>1.2.7</syndesis.version>
   </properties>
 
   <dependencyManagement>
@@ -89,6 +89,17 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-twitter</artifactId>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-jacksonxml</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-test</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
