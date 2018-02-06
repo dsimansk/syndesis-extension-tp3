@@ -1,45 +1,52 @@
 package io.syndesis.extension;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TodoReport {
 
-	private String vendor;
 
-	private String contactName;
-	private String contactNumber;
+	private String task;
 
-	private String damagedItems;
 
-	public String getVendor() {
-		return vendor;
+	public TodoReport(List<Item> damagedItems) {
+		this.task = generateForTodo(damagedItems);
 	}
 
-	public void setVendor(String vendor) {
-		this.vendor = vendor;
+	public String getTask() {
+		return task;
 	}
 
-	public String getContactName() {
-		return contactName;
+	public void setTask(String task) {
+		this.task = task;
 	}
 
-	public void setContactName(String contactName) {
-		this.contactName = contactName;
-	}
+	public static String generateForTodo(List<Item> damagedItems){
+		List<String> added = new LinkedList<>();
 
-	public String getContactNumber() {
-		return contactNumber;
-	}
+		Map<String, List<Item>> itemsPerVendorMap = damagedItems.stream().collect(Collectors.groupingBy(Item::getVendor));
 
-	public void setContactNumber(String contactNumber) {
-		this.contactNumber = contactNumber;
-	}
 
-	public String getDamagedItems() {
-		return damagedItems;
-	}
+		StringBuilder report = new StringBuilder();
+		report.append("Task: ");
 
-	public void setDamagedItems(String damagedItems) {
-		this.damagedItems = damagedItems;
+
+		itemsPerVendorMap.forEach((k,v) -> {
+			Optional<Contact> contactForCompany = Contacts.findByCompany(k);
+			if (contactForCompany.isPresent()) {
+				report.append("Contact ").append(contactForCompany.get().getName()).append(", ")
+						.append(contactForCompany.get().getPhoneNumber()).append(".");
+			} else {
+				report.append("No contact found.");
+			}
+			String listAsString = v.stream()
+					.map(Item::getId).collect(Collectors.joining("|"));
+			report.append("Damaged items: ").append(listAsString).append(".");
+
+		});
+		return  report.toString();
 	}
 }

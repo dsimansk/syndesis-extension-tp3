@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public class InventoryListTest {
 
 	private String xmlData = "<inventoryReceived>\n" +
-								"  <item id=\"XYZ123\" damaged=\"false\"/>\n" +
-								"  <item id=\"ABC789\" damaged=\"true\"/>\n" +
-							"</inventoryReceived>";
+			                 "  <item id=\"XYZ123\" damaged=\"false\" vendor=\"Good Inc\" />\n" +
+							 "  <item id=\"ABC789\" damaged=\"true\" vendor=\"Bad Inc.\" />\n" +
+							 "</inventoryReceived>";
 	@Test
 	public void listSizeTest() throws IOException {
 		ObjectMapper mapper = new XmlMapper();
