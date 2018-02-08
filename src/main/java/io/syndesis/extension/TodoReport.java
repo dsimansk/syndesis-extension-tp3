@@ -8,9 +8,7 @@ import java.util.stream.Collectors;
 
 public class TodoReport {
 
-
 	private String task;
-
 
 	public TodoReport(List<Item> damagedItems) {
 		this.task = generateForTodo(damagedItems);
@@ -29,22 +27,20 @@ public class TodoReport {
 
 		Map<String, List<Item>> itemsPerVendorMap = damagedItems.stream().collect(Collectors.groupingBy(Item::getVendor));
 
-
 		StringBuilder report = new StringBuilder();
 		report.append("Task: ");
-
 
 		itemsPerVendorMap.forEach((k,v) -> {
 			Optional<Contact> contactForCompany = Contacts.findByCompany(k);
 			if (contactForCompany.isPresent()) {
 				report.append("Contact ").append(contactForCompany.get().getName()).append(", ")
-						.append(contactForCompany.get().getPhoneNumber()).append(".");
+						.append(contactForCompany.get().getPhoneNumber()).append(". ");
 			} else {
-				report.append("No contact found.");
+				report.append("No contact found. ");
 			}
 			String listAsString = v.stream()
 					.map(Item::getId).collect(Collectors.joining("|"));
-			report.append("Damaged items: ").append(listAsString).append(".");
+			report.append("Damaged items: ").append(listAsString).append(". ");
 
 		});
 		return  report.toString();
